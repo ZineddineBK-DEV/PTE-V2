@@ -14,8 +14,9 @@ module.exports.createEvent = async function (req, res) {
       engineer: req.body.engineer,
       isAccepted: true,
     });
-
+    
     // if dates are  already reserved
+
     if (eventExist.length > 0) {
       return res.status(500).json("Dates already reserved");
     } else {
@@ -31,33 +32,34 @@ module.exports.createEvent = async function (req, res) {
         
       };
 
-      if (
-        res.locals.user.roles.includes("admin") ||
-        body.applicant === body.engineer
-      ) {
-        body.isAccepted = true;
-      }
+      // if (
+      //   res.locals.user.roles.includes("admin") ||
+      //   body.applicant === body.engineer
+      // ) {
+      //   body.isAccepted = true;
+      // }
 
       const event = await UserEvent.create({ ...body });
       if (event) {
         const user = await User.findOne({ email: req.body.email });
 
-               //send mail to user
-               const transporter = nodemailer.createTransport({
-                service: "gmail",
-                port: 587,
-                auth: {
-                  user: "prologic.simop@gmail.com",
-                  pass: "mepdngigwccwxwog",
-                },
-              });
-              transporter.sendMail({
-                from: "prologic.simop@gmail.com",
-                to: user.email,
-                subject: "Prologic -- Reservation",
-                text: "You Are Reserved And This is your JOB : " + job,
-              });          
-    res.status(200).json(event);
+          //send mail to user
+          const transporter = nodemailer.createTransport({
+          service: "gmail",
+          port: 587,
+          auth: {
+            user: "prologic.simop@gmail.com",
+            pass: "mepdngigwccwxwog",
+          },
+          });
+          transporter.sendMail({
+            from: "prologic.simop@gmail.com",
+            to: user.email,
+            subject: "Prologic -- Reservation",
+            text: "You Are Reserved And This is your JOB : " + job,
+          });  
+
+        res.status(200).json(event);
       }
       }
        } catch (error) {
@@ -66,63 +68,80 @@ module.exports.createEvent = async function (req, res) {
 };
 
 /** get events by UserID*/
+// module.exports.getUserEvents = async function (req, res) {
+//   const ID = req.query.engineer;
+  
+
+//   if (!ObjectId.isValid(ID)) {
+//     return res.status(404).json("ID is not valid");
+//   }
+//   try {
+//     //if connected user is admin
+//     if (res.locals.user.roles.includes("admin")) {
+//       const events = await UserEvent.find({
+//         engineer: ID,
+//         start: { $gte: req.query.start },
+//         end: { $lte: req.query.end },
+//       }).populate({ path: "applicant", select: "firstName lastName image -_id" })
+//       .populate({ path: "engineer",  select: "firstName lastName image -_id" });
+//       if (events) {
+//         res.status(200).json(events);
+//       }
+//     } else {
+//       //connected user is not admin=> cannot display unconfirmed events of other users
+
+//       const events = await UserEvent.find({
+//         $and: [
+//           { engineer: ID },
+//           { start: { $gte: req.query.start } },
+//           { end: { $lte: req.query.end } },
+
+//           {
+//             $or: [
+//               {
+//                 $and: [
+//                   { isAccepted: false },
+//                   {
+//                     $or: [
+//                       { applicant: res.locals.user._id },
+//                       { engineer: res.locals.user._id },
+//                     ],
+//                   },
+//                 ],
+//               },
+//               { isAccepted: true },
+//             ],
+//           },
+//         ],
+//       }).populate({ path: "applicant", select: "firstName lastName image -_id" })
+//         .populate({  path: "engineer", select: "firstName lastName image -_id" });
+
+//       if (events) {
+//         res.status(200).json(events);
+//       }
+//     }
+//   } catch (error) {
+//     res.status(404).json("there is an error ");
+//   }
+// };
+
 module.exports.getUserEvents = async function (req, res) {
-  const ID = req.query.engineer;
-    console.log(ID);
+  const engineer = req.query.engineer;
 
-  if (!ObjectId.isValid(ID)) {
-    return res.status(404).json("ID is not valid");
-  }
-  try {
-    //if connected user is admin
-    if (res.locals.user.roles.includes("admin")) {
-      const events = await UserEvent.find({
-        engineer: ID,
-        start: { $gte: req.query.start },
-        end: { $lte: req.query.end },
-      }).populate({ path: "applicant", select: "fullName image" });
-
-      if (events) {
-        res.status(200).json(events);
-      }
-    } else {
-      //connected user is not admin=> cannot display unconfirmed events of other users
-
-      const events = await UserEvent.find({
-        $and: [
-          { engineer: ID },
-          { start: { $gte: req.query.start } },
-          { end: { $lte: req.query.end } },
-
-          {
-            $or: [
-              {
-                $and: [
-                  { isAccepted: false },
-                  {
-                    $or: [
-                      { applicant: res.locals.user._id },
-                      { engineer: res.locals.user._id },
-                    ],
-                  },
-                ],
-              },
-              { isAccepted: true },
-            ],
-          },
-        ],
-      }).populate({ path: "applicant", select: "fullName image" });
-
-      if (events) {
-        res.status(200).json(events);
-      }
+    try {
+      
+        const events = await UserEvent.find({engineer}).populate({ path: "applicant", select: "fullName image" });
+  
+  
+        if (events) {
+          // console.log(events)
+          res.status(200).json(events);
+        }
+      //}
+    } catch (error) {
+      res.status(404).json("there is an error ");
     }
-  } catch (error) {
-    res.status(404).json("there is an error ");
-  }
 };
-
-
 
 
 /**Update Event  */
@@ -138,9 +157,27 @@ module.exports.updateEvent = async function (req, res) {
 
       //check if there is a conflict (to assure that there  is no conflicts)
       const checkExist = await UserEvent.find({
-        start: { $gte: event.start },
-        end: { $lte: event.end },
-        engineer: event.engineer,
+        $or: [
+          {
+            $and: [
+              { start: { $lte: req.body.start } },
+              { end: { $gte: req.body.start } },
+            ],
+          },
+          {
+            $and: [
+              { start: { $lte: req.body.end } },
+              { end: { $gte: req.body.end } },
+            ],
+          },
+          {
+            $and: [
+              { start: { $gte: req.body.start } },
+              { end: { $lte: req.body.end } },
+            ],
+          },
+        ],
+        vehicle: req.body.vehicle,
         isAccepted: true,
       });
 

@@ -43,9 +43,9 @@ module.exports.UpdateVehicle = async function(req, res, next) {
   if (!ObjectId.isValid(ID)) {
     return res.status(404).json('ID is not valid');
   }
-  const Exists = await Vehicle.findOne({ registration_number: req.body.registration_number });
-  if (Exists) {
-    return res.status(400).send('Registration number already exists');}
+  // const Exists = await Vehicle.findOne({ registration_number: req.body.registration_number });
+  // if (Exists) {
+  //   return res.status(400).send('Registration number already exists');}
 
   try {
     const updatedVehicle = await Vehicle.findByIdAndUpdate(
@@ -108,10 +108,29 @@ module.exports.searchVehicle = async function (req, res) {
 module.exports.createEvent = async function (req, res) {
   try {
     const eventExist = await VehicleEvent.find({
-      start: { $gte: req.body.start },
-      end: { $lte: req.body.end },
+      $or: [
+        {
+          $and: [
+            { start: { $lte: req.body.start } },
+            { end: { $gte: req.body.start } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $lte: req.body.end } },
+            { end: { $gte: req.body.end } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $gte: req.body.start } },
+            { end: { $lte: req.body.end } },
+          ],
+        },
+      ],
       vehicle: req.body.vehicle,
       isAccepted: true,
+    
     });
 
     // if dates are  already reserved
@@ -156,8 +175,8 @@ module.exports.getVehicleEvents = async function (req, res) {
         start: { $gte: req.query.start },
         end: { $lte: req.query.end },
       })
-        .populate({ path: "driver", select: "fullName image -_id" })
-        .populate({ path: "applicant", select: "fullName image" });
+        .populate({ path: "driver", select: "firstName lastName image -_id" })
+        .populate({ path: "applicant", select: "firstName lastName image -_id" });
       if (events) {
         res.status(200).json(events);
       }
@@ -182,8 +201,8 @@ module.exports.getVehicleEvents = async function (req, res) {
           },
         ],
       })
-        .populate({ path: "driver", select: "fullName image -_id" })
-        .populate({ path: "applicant", select: "fullName image" });
+        .populate({ path: "driver", select: "firstName lastName image -_id" })
+        .populate({ path: "applicant", select: "firstName lastName image -_id" });
       if (events) {
         res.status(200).json(events);
       } else {

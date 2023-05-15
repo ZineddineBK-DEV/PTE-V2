@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6" style="max-width: 400px;">
+                <div class="card" >
+                    <div class="card-header">
+                        <h2 class="card-title ">Technical Team</h2>
+                    </div>
+      
+                    <div class="card-body">
+                      <div style="display: flex; align-items: center;">
+                        <mat-form-field floatLabel="always" style="width: 100%; padding: 0;">
+                          <mat-label></mat-label>
+                          <input class="input-search" [(ngModel)]="search" matInput type="text" placeholder="Search technician" >
+                        </mat-form-field>
+                      </div>
+                    
+                      <div class="section" *ngFor="let item of technicians | filter:search; let i = index" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
+                        <div class="card technician" [ngClass]="{'highlight': selectedTechnician === item['_id']}" style="position:relative;">
+                          <div class="item" style="display:flex; align-items:center;">
+                            <img [src]="'http://localhost:3001/images/' + item.image" alt="Image" style="width: 50px; height: 50px; margin-right: 8px;margin-left: 5px;border-radius: 5px;">
+                            <div class="py-2 pl-2 col-span-4" style="flex:1;">
+                              <strong class="text-slate-900 text-sm font-medium dark:text-slate-200 capitalize">{{item.firstName}} {{item.lastName}}</strong>
+                              <div><span class="text-slate-900 text-sm font-medium dark:text-slate-400 capitalize">{{item.department}}</span>
+                              </div>
+                            </div>
+                            <!-- <button mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item" color="warn" (click)="deleteRoom(item['_id'])" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button> -->
+                            <button class="btn active-calender" (click)="toggleCalendar(item['_id'],i)">
+                              <mat-icon>east</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-8" style="width: 820px;">
+              
+              <div class="mycontainer" *ngIf="(showCalendar && currentCalendarIndex === i ) || (!showCalendar && currentCalendarIndex === i )">
+                <full-calendar #myCalendar [options]="calendarOptions"></full-calendar>
+              </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+  

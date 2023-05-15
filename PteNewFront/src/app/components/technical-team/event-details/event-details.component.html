@@ -1,0 +1,84 @@
+<div class="bg-white p-10 rounded-lg font-medium">
+    <div class="inline-flex space-x-16">
+        <div class="inline-flex ml-3 w-36">
+            <div><img class="w-12 h-12 rounded-md shadow-lg" [src]="imageSrc" alt="applicant">
+            </div>
+            <div class="ml-3 block capitalize text-sm font-medium mt-1">
+                <div class="underline text-gray-600">Applicant</div>
+                <div>{{ event?.[0]?.applicant.firstName }} {{ event?.[0]?.applicant.fullName }} </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    
+    <div class="inline-flex pl-2 pt-3 capitalize">
+        <div class="pt-1"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="shadow-xl text-gray-600" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path  d="M18 2H6c-1.103 0-2 .897-2 2v18l8-4.572L20 22V4c0-1.103-.897-2-2-2zm0 16.553-6-3.428-6 3.428V4h12v14.553z"></path>
+        </svg>
+    </div>
+    <h6 class="  pl-3 underline text-gray-600">Intervention context : </h6>
+    <h5 class=" capitalize pl-3 "> {{ event?.[0]?.title }} </h5>
+    </div>
+    <br>
+
+    <div class="inline-flex pl-2 pt-3 capitalize">
+        <div class="pt-1"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="shadow-xl text-gray-600" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path fill="none" stroke="#000" stroke-width="2" d="M3,6 L21,6 L3,6 Z M10,2 L10,4 M14,2 L14,4 M16,12 C18.3736719,13.1826446 20,15.6506255 20,19 L20,23 L4,23 L4,19 C4,15.6457258 5.6310898,13.1754259 8,12 M12,16.5 L12,23 M12,13 C15.3137085,13 18,10.3137085 18,7 C18,3.6862915 15.3137085,1 12,1 C8.6862915,1 6,3.6862915 6,7 C6,10.3137085 8.6862915,13 12,13 Z M8,12 C8,14.209139 9.790861,16 12,16 L12,16 C14.209139,16 16,14.209139 16,12"></path>        </svg>
+    </div>
+    <h6 class="  pl-3 underline text-gray-600">Job : </h6>
+    <h5 class=" capitalize pl-3 "> {{ event?.[0]?.job }} </h5>
+    </div>
+    <br>
+
+    <div class="inline-flex pl-2 pt-3 capitalize">
+        <div class="pt-1">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="shadow-xl text-gray-600" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path  stroke="#000" stroke-width="1"   d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path>         </svg>
+    </div>
+    <h6 class="  pl-3 underline text-gray-600">Address : </h6>
+    <h5 class=" capitalize pl-3 "> {{ event?.[0]?.address }} </h5>
+    </div>
+    <br>
+
+    <div class="inline-flex pl-2 capitalize">
+        <div>
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" class="shadow-xl text-gray-600 text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="#000" stroke-width="1"  d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z">
+            </path></svg>
+        </div>
+        <h6 class="pl-2 text-gray-600 underline">start :</h6>
+        <h5 class="pl-2">{{dateStart}}</h5>
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" class="text-gray-700 pl-2 text-2xl pt-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="#000" stroke-width="1" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
+            <path stroke="#000" stroke-width="1" d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg>
+            <h5 class="pl-1">&nbsp; {{timeStart}}</h5>
+    </div>
+    <br>
+
+    <div class="inline-flex pl-2 capitalize">
+            <div>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" class="shadow-xl text-gray-600 text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                <path  stroke="#000" stroke-width="1" d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path>
+            </svg>
+        </div>
+        <h6 class="pl-2 text-gray-600 underline">end : </h6>
+        <h5 class="pl-2"> {{ dateEnd }}</h5>
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" class="text-gray-700 pl-2 text-2xl pt-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="#000" stroke-width="1" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
+            <path stroke="#000" stroke-width="1" d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path>
+        </svg>
+        <h5 class="pl-1"> &nbsp; {{timeEnd}}</h5>
+    </div>
+    <br>
+
+
+    <div class="grid grid-cols-2 gap-1 mt-5 text-center" style="margin-bottom: 8px; display: flex; justify-content: center; align-items: center;">
+        <button *ngIf="checkAdmin()" type="button" class="btn btn-danger mx-auto" style="width: 220px;" (click)="deleteEvent(data['_id'])">Delete</button>
+        <button *ngIf="!data.isAccepted" type="button" class="btn btn-success mx-auto" style="width: 220px;" (click)="acceptEvent()">Confirm</button>
+
+    </div>
+    
+    
+</div>
+

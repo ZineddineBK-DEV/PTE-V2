@@ -1,0 +1,59 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Users</h4>
+            </div>
+            <div class="card-body">
+              
+              <div class="search-bar">
+              <mat-form-field>
+                <mat-label></mat-label>
+                
+                <input matInput 
+                 #key="ngModel" ngModel name="key" id="searchName"
+                  type="text" placeholder="Enter search text">
+                  <mat-icon matSuffix >search</mat-icon>
+              </mat-form-field>
+            </div>
+              <div class="vehicle-container">
+                <div class="vehicle-box" *ngFor="let worker of workers" (click)="onUserClick(worker._id)">
+                  <table>
+                  <div class="room-items">
+                  
+                    <tr>
+                   <td> <img [src]="'http://localhost:3001/images/'+ worker.image" ></td>
+                   <td> <div class="person-details"> {{worker.firstName}} {{worker.lastName}}</div></td>
+                  </tr>
+                 
+                  <tr>
+                  <td><div class="user-title"><mat-icon matSuffix >badge</mat-icon>{{ worker.title }}</div></td>
+                
+
+                  <td><div class="user-dapar"><mat-icon matSuffix >apartment</mat-icon>{{ worker.department }}</div></td>
+                </tr>
+           
+              </div>
+              
+             
+            </table>
+            <div class="delete-icon" *ngIf="checkAdmin()">    <a (click)="deleteUser(worker._id)"> <mat-icon matSuffix color="red">delete</mat-icon></a> </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="calendarcontainer" *ngIf="showCalendar">
+    <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
+  </div>
+  

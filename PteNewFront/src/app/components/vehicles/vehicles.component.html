@@ -1,0 +1,105 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+
+ <div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-6" style="max-width: 400px;">
+              <div class="card" >
+                  <div class="card-header">
+                      <h2 class="card-title ">Vehicles</h2>
+                  </div>
+    
+                  <div class="card-body">
+                      <div style="display: flex; align-items: center;">
+                          <button *ngIf="checkAdmin()" class="btn-add-room" (click)="openAddForm()"><strong>+</strong> vehicle</button>
+                          <mat-form-field floatLabel="always">
+                            <mat-label></mat-label>
+                            <input class="input-search" matInput (ngModelChange)="searchVehicle(key.value)" #key="ngModel" ngModel name="key" id="searchName" type="text" placeholder="Enter search text">
+                          </mat-form-field>
+                      </div>
+                      <div class="vehicle-container">
+                        <div class="section" *ngFor="let vehicle of vehicles" (click)="onVehicleClick(vehicle._id)" (mouseenter)="hoveredItem = vehicle" (mouseleave)="hoveredItem = null">
+                          <div class="card cardd"  style="position:relative;">
+                            <div class="item" style="display:flex; align-items:center;">
+                              <div class="py-2 pl-2 col-span-4" style="flex:1; margin-left: 8px;">
+                          <!-- <div class="car-icon"><mat-icon matSuffix >garage</mat-icon></div> -->
+                          <div class="vehicle-model"> <strong>Model: {{ vehicle.model }}</strong> </div>
+                          <div class="vehicle-registration">Registration number: {{ vehicle.registration_number }}</div>
+                          <div class="vehicle-type">Type: {{ vehicle.type }}</div>
+                          </div>
+                          <button  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === vehicle && checkAdmin()" color="warn" (click)="deleteVehicle(vehicle._id)" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button>
+                          <button  class="btn active-calender" ><mat-icon>east</mat-icon></button>
+                          </div>
+                          </div>
+                          <!-- <div class="manage-icon" *ngIf="checkAdmin()">
+                          <a (click)="deleteVehicle(vehicle._id)"> <mat-icon matSuffix color="red">delete</mat-icon></a> 
+                          <a><mat-icon matSuffix (click)="openupdateForm(vehicle._id)">edit</mat-icon></a>
+                        </div> -->
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-md-8" style="width: 820px;">
+            
+            <div class="calendarcontainer" *ngIf="showCalendar">
+              <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
+            </div>
+            
+          </div>
+      </div>
+  </div>
+</div>
+  
+
+<!-- <app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Vehicles</h4>
+            </div>
+            <div class="card-body">
+              <div class="search-bar">
+              <mat-form-field>
+                <mat-label></mat-label>
+                
+                <input matInput (ngModelChange)="searchVehicle(key.value)"
+                 #key="ngModel" ngModel name="key" id="searchName"
+                  type="text" placeholder="Enter search text">
+                  <mat-icon matSuffix style="margin-bottom: 8px;" >search</mat-icon>
+              </mat-form-field>
+            </div>
+              <div class="vehicle-container">
+                <div class="vehicle-box" *ngFor="let vehicle of vehicles" (click)="onVehicleClick(vehicle._id)">
+                  <div class="car-items">
+                  <div class="car-icon"><mat-icon matSuffix >garage</mat-icon></div>
+                  <div class="vehicle-model">Model: {{ vehicle.model }}</div>
+                  <div class="vehicle-registration">Registration number: {{ vehicle.registration_number }}</div>
+                  <div class="vehicle-type">Type: {{ vehicle.type }}</div>
+                  </div>
+                  <div class="manage-icon" *ngIf="checkAdmin()">
+                  <a (click)="deleteVehicle(vehicle._id)"> <mat-icon matSuffix color="red">delete</mat-icon></a> 
+                  <a><mat-icon matSuffix (click)="openupdateForm(vehicle._id)">edit</mat-icon></a>
+                </div>
+                </div>
+              </div>
+              <div class="add-boutton" *ngIf="checkAdmin()">
+                <div class="button"><a  (click)="openAddForm()">Add vehicle</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="calendarcontainer" *ngIf="showCalendar">
+    <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
+  </div> -->
+  

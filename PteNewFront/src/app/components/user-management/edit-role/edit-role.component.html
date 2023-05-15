@@ -1,0 +1,20 @@
+<button class="close" mat-button (click)="onClose()">X</button>
+<div class="container">  
+    <form #userForm="ngForm" (ngSubmit)="onUpdate(userForm.value)">
+        <fieldset>
+        <legend >Edit user roles</legend>
+        
+        <div class="form-group"  style="width: 300px; margin-top: 40px;">
+            
+            <select class="form-select"   #mySelect (change)="onSelectionRole(mySelect.value)">
+              <option value="" selected hidden>{{data.roles}}</option>
+              <option value="sales_assistant">sales_assistant</option>
+              <option value="virt_manager">virt_manager</option>
+              <option value="engineer">engineer</option>
+            </select>
+        </div>
+        <button class="btn  profile-button" type="submit" style="background: #f44336;">Save updates</button>
+
+    </fieldset>
+    </form>
+</div>

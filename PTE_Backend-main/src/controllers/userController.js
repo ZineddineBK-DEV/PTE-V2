@@ -147,7 +147,7 @@ module.exports.login = async function (req, res, next) {
     return res.status(200).json({
       token: token,
       expiresIn: 6000,
-      userName: fetchedUser.fullName,
+      userName: fetchedUser.firstName,
       image: fetchedUser.image,
       _id: fetchedUser._id,
       roles: fetchedUser.roles,
@@ -178,22 +178,21 @@ module.exports.updateUserRoles = async function (req, res) {
     return res.status(404).json("ID is not valid");
   }
   const body = { ...req.body };
-  console.log(body);
   var userRoles = [];
 
-  body.roles.forEach((role) => {
-    if (role === "sales_assistant") {
-      userRoles.push(Roles.sales_assistant);
-    }
-    if (role === "virt_manager") {
-      userRoles.push(Roles.virt_manager);
-    }
-    if (role === "engineer") {
-      userRoles.push(Roles.Engineer);
-    }
-  });
+  // body.roles((role) => {
+  //   if (role === "sales_assistant") {
+  //     userRoles.push(Roles.sales_assistant);
+  //   }
+  //   if (role === "virt_manager") {
+  //     userRoles.push(Roles.virt_manager);
+  //   }
+  //   if (role === "engineer") {
+  //     userRoles.push(Roles.Engineer);
+  //   }
+  // });
   console.log(userRoles);
-  User.findByIdAndUpdate(ID, { $set: { roles: userRoles } })
+  User.findByIdAndUpdate(ID, { $set: { roles: body.roles } })
     .then(() => {
       res.status(200).json("roles updates");
     })
@@ -201,11 +200,13 @@ module.exports.updateUserRoles = async function (req, res) {
 };
 
 module.exports.UpdateUser = async function (req, res, next) {
+  
   const body = { ...req.body };
 
-  if (req.file) {
-    body.image = req.file.filename;
-  }
+  // if (req.file) {
+  //   body.image = req.file.name;
+  // }
+
   const ID = req.params.id;
   if (!ObjectId.isValid(ID)) {
     return res.status(404).json("ID is not valid");
@@ -355,7 +356,7 @@ module.exports.getAllUsers = async function (req, res) {
   User.find({
     $and: [
       { isEnabled: true },
-      { _id: { $ne: req.user._id } },
+      // { _id: { $ne: req.user._id } },
       { roles: { $ne: "admin" } },
     ],
   })
@@ -425,13 +426,13 @@ module.exports.getUserById = async function (req, res) {
 };
 
 module.exports.filterUsers = async function (req, res) {
-  var fullNameFilter = req.body.fullName;
+  var firstNameFilter = req.body.firstName;
   var titleFilter = req.body.title;
   var driversFilter = req.body.drivingLicense;
   var departmentFilter = req.body.department;
   var pathsFilter = req.body.paths;
-  if (fullNameFilter) {
-    fullNameFilter = fullNameFilter.trim().length === 0 ? null : fullNameFilter;
+  if (firstNameFilter) {
+    firstNameFilter = firstNameFilter.trim().length === 0 ? null : firstNameFilter;
   }
   if (titleFilter) {
     titleFilter = titleFilter.trim().length === 0 ? null : titleFilter;
@@ -469,8 +470,8 @@ module.exports.filterUsers = async function (req, res) {
           {
             $or: [
               {
-                fullName: fullNameFilter
-                  ? new RegExp(fullNameFilter, "i")
+                firstName: firstNameFilter
+                  ? new RegExp(firstNameFilter, "i")
                   : new RegExp("[a-zA-Z]"),
               },
               {
@@ -500,14 +501,18 @@ module.exports.filterUsers = async function (req, res) {
 };
 
 module.exports.searchUsers = async function (req, res) {
-  var fullNameFilter = req.body.fullName;
+  var firstNameFilter = req.body.firstName;
+  var lastNameFilter = req.body.lastName;
   var addressFilter = req.body.address;
   var titleFilter = req.body.title;
   var departmentFilter = req.body.department;
   var isNotEnabledFilter = req.body.isEnabled;
   var pathsFilter = req.body.paths;
-  if (fullNameFilter) {
-    fullNameFilter = fullNameFilter.trim().length === 0 ? null : fullNameFilter;
+  if (firstNameFilter) {
+    firstNameFilter = firstNameFilter.trim().length === 0 ? null : firstNameFilter;
+  }
+  if (lastNameFilter) {
+    lastNameFilter = lastNameFilter.trim().length === 0 ? null : lastNameFilter;
   }
   if (titleFilter) {
     titleFilter = titleFilter.trim().length === 0 ? null : titleFilter;
@@ -533,8 +538,12 @@ module.exports.searchUsers = async function (req, res) {
       roles: { $ne: "admin" },
       isEnabled: isNotEnabledFilter ? false : true,
       _id: { $ne: res.locals.user._id },
-      fullName: fullNameFilter
-        ? new RegExp(fullNameFilter, "i")
+      firstName: firstNameFilter
+        ? new RegExp(firstNameFilter, "i")
+        : new RegExp("[a-zA-Z]"),
+
+        lastName: lastNameFilter
+        ? new RegExp(lastNameFilter, "i")
         : new RegExp("[a-zA-Z]"),
 
          title: titleFilter
