@@ -15,7 +15,7 @@ router.patch("/update/:id",authMiddleware,checkAdminMiddleware,roomCtr.UpdateRoo
 /**Events Managment ********/
 router.get("/events", authMiddleware, roomCtr.getRoomEvents);
 router.post("/setevent", authMiddleware, roomCtr.createEvent);
-router.patch("/acceptEvent/:id", authMiddleware, roomCtr.updateEvent);
+router.patch("/acceptEvent/:id", authMiddleware,checkAdminMiddleware, roomCtr.updateEvent);
 router.delete("/deleteEvent/:id", authMiddleware, roomCtr.deleteEvent);
 
 module.exports = router;

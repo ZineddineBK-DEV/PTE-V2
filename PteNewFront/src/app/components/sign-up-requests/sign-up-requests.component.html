@@ -1,20 +1,21 @@
-<app-sidebar></app-sidebar>
 <app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
 
 <div class="container">
 
     <div class="search-div">
                 <div class="rounded overflow-hidden w-screen max-w-5xl bg-gray-100 grid grid-cols-5 mx-12 mb-3" style="background-color:#212529;">
                   <div class="p-3 font-sm">
-                    <label class="block mb-2 text-sm font-medium text-[#041e62] dark:text-gray-300">Fullname</label>
+                    <label class="label">Fullname</label>
                     <input id="fullname" [(ngModel)]="searchName" class="bg-gray-50 border border-gray-300 text-[#041e62] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white capitalize">
                   </div>
                   <div class="p-3 font-sm">
-                    <label class="block mb-2 text-sm font-medium text-[#041e62] dark:text-gray-300">Phone</label>
+                    <label class="label">Phone</label>
                     <input name="title" [(ngModel)]="searchPhone" class="bg-gray-50 border border-gray-300 text-[#041e62] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white capitalize">
                   </div>
                   <div class="p-3 font-sm">
-                    <label class="block mb-2 text-sm font-medium text-[#041e62] dark:text-gray-300">Department</label>
+                    <label class="label">Department</label>
                     <input [(ngModel)]="searchDepartment" class="bg-gray-50 border border-gray-300 text-[#041e62] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white capitalize">
                   </div>
                   <div class="relative">
@@ -43,9 +44,11 @@
                     <td>{{user.department }}</td>
                     
                     <td>
-                      <button mat-icon-button style="color: greenyellow;" (click)="openConfirm(user._id)"><mat-icon>done</mat-icon></button>
-                      <span>&nbsp;&nbsp;&nbsp;</span>
-                      <button mat-icon-button color="warn" (click)="openDelete(user._id)"><mat-icon>delete_outline</mat-icon></button>
+                      <button matTooltip="View all the details" mat-icon-button style="color: yellow" (click)="openViewDetails(user)"><mat-icon>visibility</mat-icon></button>
+
+                      <button matTooltip="Accept request" mat-icon-button style="color: greenyellow;" (click)="openConfirm(user._id)"><mat-icon>done</mat-icon></button>
+                      <!-- <span>&nbsp;&nbsp;&nbsp;</span> -->
+                      <button matTooltip="Delete request" mat-icon-button color="warn" (click)="openDelete(user._id)"><mat-icon>delete_outline</mat-icon></button>
                     </td>
                   </tr>
                 </tbody>

@@ -61,21 +61,23 @@ export class RoomEventsComponent  {
     d.end =newEndtDate;
     d.room = this.data.room;
     d.applicant = localStorage.getItem("userId");
+    console.log("applicant :",d.applicant)
     // console.log(d)
     if(!this.errorDate){
       this.roomService.setRoomEvent(d).subscribe({
-        next: resultat => {
-          //console.log('Success: ', resultat);
-          this.showNotification('top','center','success','Event created');
-          setTimeout(() => {window.location.reload();}, 1000);
-        },
-        error: err => {
-          //console.log('Error: ', err);
-          this.showNotification('top','center','danger','Date already reserved');
-        },
-        complete: () => {
-        }
+        // next: resultat => {
+          
+        //   setTimeout(() => {window.location.reload();}, 1000);
+        // },
+        // error: err => {
+        //   // //console.log('Error: ', err);
+        //   // this.showNotification('top','center','danger','Date already reserved');
+        // },
+        // complete: () => {
+        // }
+        
       });
+      window.location.reload();
     }
   }
 

@@ -48,10 +48,7 @@ export class NgbdModalContent {
     console.log(this.IdItem)
     this.roomsService.deleteRoom(this.IdItem).subscribe(resultat=>{
       
-      this.showNotification('bottom', 'center',"Room deleted")
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      window.location.reload();
     })
   }
 
@@ -113,7 +110,6 @@ export class RoomsComponent {
   ngOnInit() : void{
     this.roomsService.getRooms().subscribe((resultData:any) =>{
       this.rooms = resultData;
-
     })
     this.currentCalendarIndex = -1;
     this.itsAdmin = this.checkAdmin();

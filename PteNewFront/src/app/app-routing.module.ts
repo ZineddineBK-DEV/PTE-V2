@@ -17,6 +17,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { TechnicalTeamComponent } from './components/technical-team/technical-team.component';
+import { VirtualisationComponent } from './components/virtualisation/virtualisation.component';
 
 const routes:  Routes = [
   { path: 'signup',     component: SignupComponent },
@@ -28,11 +29,10 @@ const routes:  Routes = [
   { path :'conference-rooms',canActivate:[AuthGuard], component:RoomsComponent},
   { path: 'requests',canActivate:[AuthGuard,RoleGuard] ,component: SignUpRequestsComponent},
   { path :'user-profile/:id',canActivate:[AuthGuard], component:UserProfileComponent},
-  {path : 'user-management',canActivate:[AuthGuard] , component:UserManagementComponent},
+  {path : 'user-management',canActivate:[AuthGuard,RoleGuard] , component:UserManagementComponent},
   {path : 'vehicles',canActivate:[AuthGuard], component:VehiclesComponent},
   {path : 'technical team' ,canActivate:[AuthGuard],component:TechnicalTeamComponent},
-  
-  
+  {path : 'virtualisation' ,canActivate:[AuthGuard],component:VirtualisationComponent},
   
   {
     path: '',

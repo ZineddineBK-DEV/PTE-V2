@@ -15,11 +15,12 @@
             <strong>{{user.title}}</strong>
           </div>
         </div>
-        <a class="dropdown-item"><mat-icon>settings</mat-icon>Settings</a>
+        <!-- <a class="dropdown-item" routerLink="/changepassword"><mat-icon>settings</mat-icon>Change Password</a> -->
+        <a class="dropdown-item" (click)="goToSettings()"><mat-icon>settings</mat-icon>Change Password</a>
         <a class="dropdown-item" (click)="goToProfile()"><mat-icon>person</mat-icon>View Profile</a>
         <a class="dropdown-item"><mat-icon>notifications</mat-icon>Notifications</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#"><mat-icon>logout</mat-icon>Logout</a>
+        <a class="dropdown-item" (click)="logout()"><mat-icon>logout</mat-icon>Logout</a>
       </div>
     </li>
   </ul>

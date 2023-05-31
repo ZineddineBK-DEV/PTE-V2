@@ -1,0 +1,98 @@
+
+<style>
+    /* Styles for the container */
+    .details-container {
+     margin-top: 20px;
+      max-width: 500px;
+      margin: auto auto ;
+      
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  
+    /* Styles for the heading */
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  
+    /* Styles for the detail rows */
+    .detail-row {
+      margin-bottom: 10px;
+    }
+  
+    .detail-label {
+      font-weight: bold;
+      width: 120px;
+      display: inline-block;
+    }
+  
+    .detail-value {
+      margin-left: 10px;
+    }
+  
+    /* Styles for the close button */
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  
+    /* Styles for the profile image */
+    .profile-image {
+      display: block;
+      max-width: 200px;
+      height: 100px;
+      margin: 20px auto;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+  
+  <button class="close" mat-button (click)="onClose()">X</button>
+  <body>
+      
+    <div class="details-container" style="border-color: #f44336; ">
+      <h1>Employee's Details</h1>
+      <img class="profile-image" [src]="'http://localhost:3001/images/' + data.image" alt="Profile Image">
+      <div class="detail-row">
+        <span class="detail-label">Full Name:</span>
+        <span class="detail-value">{{data.fullname}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email:</span>
+        <span class="detail-value">{{data.email}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Phone:</span>
+        <span class="detail-value">{{data.phone}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Specialization:</span>
+        <span class="detail-value">{{data.specialization}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Experience</span>
+        <span class="detail-value">{{data.experienceLevel}}</span>
+      </div>
+      <div class="detail-row">
+          <span class="detail-label">Certification(s):</span>
+          <span class="detail-value"><ul>
+            <li *ngFor="let certification of data.certification">{{ certification }}</li>
+          </ul></span>
+      </div>
+    </div>
+  
+    <!-- Include Angular and Material icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.0/angular-material.min.js"></script>
+  </body>
+  
+

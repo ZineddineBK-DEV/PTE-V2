@@ -1,15 +1,18 @@
 const { ObjectId } = require("mongodb");
 const Room = require("../../models/material_resources/room");
 const RoomEvent = require("../../models/material_resources/events/roomEvent");
+const User = require("../../models/user")
+const nodemailer = require("nodemailer");
 
 /** Add Room */
 module.exports.addRoom = async function (req, res, next) {
   try {
     const body = {capacity: req.body.capacity, label: req.body.label, location: req.body.location };
     const room = await Room.create({ ...body });
-    if (room) {
-      res.status(200).json(room);
-    }
+    // if (room) {
+    //   res.status(200).json(room);
+    // }
+    console.log(room)
   } catch (error) {
     res.status(500).json(error);
   }
@@ -147,11 +150,28 @@ module.exports.createEvent = async function (req, res) {
       if (res.locals.user.roles.includes("admin")) {
         body.isAccepted = true;
       }
+      
       const event = await RoomEvent.create({ ...body });
       if (event) {
         res.status(200).json(event);
       }
-    }
+      const user = await User.findOne({ _id: req.body.applicant });
+      //send mail to user
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        port: 587,
+        auth: {
+          user: "prologic.simop@gmail.com",
+          pass: "mepdngigwccwxwog",
+        },
+      });
+      transporter.sendMail({
+        from: "prologic.simop@gmail.com",
+        to: user.email,
+        subject: "Prologic -- Reservation request",
+        text: " We will send you an email when your reservation is  confermed . " 
+      });
+      }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -183,11 +203,6 @@ try {
   res.status(404).json("there is an error ");
 }
 }
-
-
-
-
-
 
 
 /**Update Event  */
@@ -224,8 +239,26 @@ module.exports.updateEvent = async function (req, res) {
         end: { $gte: event.end },
         isAccepted: false,
       });
-
-      if (accept) return res.status(200).json(accept);
+      const user = await User.findOne({ _id: req.body.applicant });
+      if (accept){
+        
+        //send mail to user
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          port: 587,
+          auth: {
+            user: "prologic.simop@gmail.com",
+            pass: "mepdngigwccwxwog",
+          },
+        });
+        transporter.sendMail({
+          from: "prologic.simop@gmail.com",
+          to: user.email,
+          subject: "Prologic -- Reservation request",
+          text: " Your register request is accepted . " 
+        });
+        return res.status(200).json(accept);
+      } 
     }
   } catch (error) {
     res.status(500).json(error);

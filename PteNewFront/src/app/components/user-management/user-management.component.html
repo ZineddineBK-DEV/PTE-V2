@@ -1,5 +1,6 @@
-<app-sidebar></app-sidebar>
 <app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
 
 
 <div class="container">
@@ -45,9 +46,10 @@
     <td>{{user.department }}</td>
     <td>{{user.title }}</td>
     <td>
-        <button mat-icon-button routerLink="/user-profile/{{user._id}}"><mat-icon>launch</mat-icon></button>
-        <span>&nbsp;&nbsp;&nbsp;</span>
-        <button *ngIf="checkAdmin()" mat-icon-button color="warn" (click)="open(user['_id'])"><mat-icon>delete_outline</mat-icon></button>
+      <button matTooltip="View all the details" mat-icon-button style="color: yellow" (click)="openViewDetails(user)"><mat-icon>visibility</mat-icon></button>
+        <button matTooltip="View profile" mat-icon-button routerLink="/user-profile/{{user._id}}"><mat-icon>launch</mat-icon></button>
+        <!-- <span>&nbsp;&nbsp;&nbsp;</span> -->
+        <button  matTooltip="Delete profile" *ngIf="checkAdmin()" mat-icon-button color="warn" (click)="open(user['_id'])"><mat-icon>delete_outline</mat-icon></button>
     </td>
     </tr>
 </tbody>

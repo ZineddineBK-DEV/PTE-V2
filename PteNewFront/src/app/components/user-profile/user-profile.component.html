@@ -10,7 +10,7 @@
           <div class="profile-image">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <img class="rounded-circle mt-5" width="150px" [src]="imageSrc">
-              <button class="no-print btn-edit-image hidden-btn" *ngIf=" checkAdmin() || userAuth" (click)="editImage()" style="background-color:white;color : #f44336" mat-mini-fab>
+              <button matTooltip="Edit profil image" class="no-print btn-edit-image hidden-btn" *ngIf=" checkAdmin() || userAuth" (click)="editImage()" style="background-color:white;color : #f44336" mat-mini-fab>
                 <mat-icon>edit</mat-icon>
               </button>
               &nbsp;
@@ -29,7 +29,7 @@
             <div class="space-y-4">
               <div class="flex justify-between">
                 <h4 class="block-title">Informations</h4>
-                <button class="no-print btn-edit-image hidden-btn" *ngIf=" checkAdmin() || userAuth" (click)="editProfile()" style="background-color:white;color : #f44336" mat-mini-fab>
+                <button matTooltip="Edit details" class="no-print btn-edit-image hidden-btn" *ngIf=" checkAdmin() || userAuth" (click)="editProfile()" style="background-color:white;color : #f44336" mat-mini-fab>
                   <mat-icon>edit</mat-icon>
                 </button>
               </div>
@@ -90,7 +90,7 @@
     
             <div class="flex justify-between">
               <h1 class="card-title">Experience</h1>
-              <button class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddExperience()" style="background-color:white;color: #f44336;" mat-mini-fab><mat-icon>add</mat-icon></button>
+              <button matTooltip="Add experience" class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddExperience()" style="background-color:white;color: #f44336;" mat-mini-fab><mat-icon>add</mat-icon></button>
             </div>
     
             <div class="section" *ngFor="let item of data.cv.professionnal_career" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
@@ -135,7 +135,7 @@
         <div class="card-body">
           <div class="flex justify-between">
             <h1 class="card-title">Education</h1>
-            <button class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddEducation()" style="background-color:white;color: #f44336" mat-mini-fab><mat-icon>add</mat-icon></button>
+            <button matTooltip="Add education" class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddEducation()" style="background-color:white;color: #f44336" mat-mini-fab><mat-icon>add</mat-icon></button>
           </div>
           <div class="section" *ngFor="let item of data.cv.studies" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
             <div class=" w-full space-y-5">
@@ -184,7 +184,7 @@
         <div class="card-body">
           <div class="flex justify-between">
             <h1 class="card-title">Projects</h1>
-            <button class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddProject()" style="background-color:white;color: #f44336;" mat-mini-fab><mat-icon>add</mat-icon></button>
+            <button matTooltip="Add project" class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddProject()" style="background-color:white;color: #f44336;" mat-mini-fab><mat-icon>add</mat-icon></button>
           </div>
           <div class="section" *ngFor="let item of data.cv.projets" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
             <div class="w-full space-y-5">
@@ -224,7 +224,7 @@
         <div class="card-body">
           <div class="flex justify-between">
             <h1 class="card-title">Certifications</h1>
-            <button class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddCertification()" style="background-color:white;color: #f44336;" mat-mini-fab><mat-icon>add</mat-icon></button>
+            <button matTooltip="Add certification" class="no-print btn-edit-image " *ngIf=" checkAdmin() || userAuth" (click)="AddCertification()" style="background-color:white;color: #f44336;" mat-mini-fab><mat-icon>add</mat-icon></button>
           </div>
           <div class="section" *ngFor="let item of data.cv.certifications" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
   
@@ -260,17 +260,3 @@
     </div>
     
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-   
-  
-  
-  
-  
-  

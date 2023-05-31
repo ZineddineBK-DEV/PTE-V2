@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/model/user';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProfilDetailsComponent } from './profil-details/profil-details.component';
 declare var $: any;
 
 
@@ -224,6 +225,16 @@ clearInput(): void{
   this.searchName='';
   this.searchDepartment='';
   
+}
+
+openViewDetails(user){
+  const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    dialogConfig.height="78%";
+    dialogConfig.data=user;
+    this.dialog.open(ProfilDetailsComponent, dialogConfig)
 }
 
 }

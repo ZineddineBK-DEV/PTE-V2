@@ -72,7 +72,6 @@ export class AuthService {
   return this.http.get<boolean>(`${this.apiBaseUrl}/users/email-exists?email=${email}`);
 }
 
-
   signup(form: FormGroup, file : File) {
     let success;
     console.log(form.value);
@@ -138,8 +137,7 @@ export class AuthService {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
     localStorage.setItem("userId", this.userId);
-    console.log(localStorage.getItem("token"));
-    console.log(localStorage.getItem("expiration"))
+    
   }
   private clearAuthData() {
     localStorage.removeItem("token");

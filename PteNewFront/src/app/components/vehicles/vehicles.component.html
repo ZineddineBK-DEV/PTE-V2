@@ -12,11 +12,14 @@
     
                   <div class="card-body">
                       <div style="display: flex; align-items: center;">
-                          <button *ngIf="checkAdmin()" class="btn-add-room" (click)="openAddForm()"><strong>+</strong> vehicle</button>
+                          <button *ngIf="checkAdmin()" class="btn-add-room" (click)="openAddForm()"><strong>+</strong> Vehicle</button>
                           <mat-form-field floatLabel="always">
                             <mat-label></mat-label>
-                            <input class="input-search" matInput (ngModelChange)="searchVehicle(key.value)" #key="ngModel" ngModel name="key" id="searchName" type="text" placeholder="Enter search text">
-                          </mat-form-field>
+                            <div class="input-wrapper">
+                              <input class="input-search" matInput (ngModelChange)="searchVehicle(key.value)" #key="ngModel" ngModel name="key" id="searchName" type="text" placeholder="Enter model">
+                            <mat-icon class="search-icon">search</mat-icon>
+                            </div>
+                            </mat-form-field>
                       </div>
                       <div class="vehicle-container">
                         <div class="section" *ngFor="let vehicle of vehicles" (click)="onVehicleClick(vehicle._id)" (mouseenter)="hoveredItem = vehicle" (mouseleave)="hoveredItem = null">
@@ -28,8 +31,10 @@
                           <div class="vehicle-registration">Registration number: {{ vehicle.registration_number }}</div>
                           <div class="vehicle-type">Type: {{ vehicle.type }}</div>
                           </div>
-                          <button  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === vehicle && checkAdmin()" color="warn" (click)="deleteVehicle(vehicle._id)" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button>
-                          <button  class="btn active-calender" ><mat-icon>east</mat-icon></button>
+                          <button matTooltip="Delete vehicle"  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === vehicle && checkAdmin()" color="warn" (click)="deleteVehicle(vehicle._id)" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button>
+                          <button matTooltip="Edit vehicle" mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === vehicle && checkAdmin()"  (click)="openupdateForm(vehicle._id)" (mousedown)="highlightCard()"> <mat-icon>edit</mat-icon></button>
+
+                          <button matTooltip="Consult calendar"  class="btn active-calender" ><mat-icon>calendar_month</mat-icon></button>
                           </div>
                           </div>
                           <!-- <div class="manage-icon" *ngIf="checkAdmin()">

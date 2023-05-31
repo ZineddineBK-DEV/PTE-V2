@@ -21,12 +21,11 @@ export class AddRoomComponent {
 
   submit(d:any){
     
-    //console.log(d)
-    this.roomService.addRoom(d).subscribe(resultat =>{})
-      this.showNotification('top','center');
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+  
+    this.roomService.addRoom(d).subscribe(resultat =>{
+      window.location.reload();
+    })
+      
 
       
   }

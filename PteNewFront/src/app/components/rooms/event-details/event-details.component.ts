@@ -14,9 +14,7 @@ export class EventDtailsComponent {
   imageSrc;
   dateStart:any ; dateEnd :any;
   timeStart:any; timeEnd :any;
-   body = {
-    isAccepted: "true"
-  };
+   body ;
 
 
   constructor( private roomService : RoomsService,
@@ -45,11 +43,16 @@ export class EventDtailsComponent {
 
 
       this.imageSrc = 'http://localhost:3001/images/' +this.event[0].applicant.image;
+      this.body = {
+        isAccepted: "true",
+        applicant : this.data.applicant._id
+      };
     });
   }
 
   acceptEvent(){
     this.roomService.confirmEvent(this.data._id,this.body).subscribe(resultat=>{
+
       location.reload();
     })
   }

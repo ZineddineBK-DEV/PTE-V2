@@ -332,22 +332,22 @@ module.exports.confirmSignUp = async function (req, res) {
   }
 
   const user =await  User.findByIdAndUpdate(ID, { isEnabled: true });
-  // if (user) {
-  //   const transporter = nodemailer.createTransport({
-  //     service: "gmail",
-  //     port: 587,
-  //     auth: {
-  //       user: "prologic.simop@gmail.com",
-  //       pass: "mepdngigwccwxwog",
-  //     },
-  //   });
-  //   transporter.sendMail({
-  //     from: "prologic.simop@gmail.com",
-  //     to: user.email,
-  //     subject: "Prologic -- register request accepted",
-  //     text: "Your register request is accepted",
-  //   });
-  // }
+  if (user) {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "prologic.simop@gmail.com",
+        pass: "mepdngigwccwxwog",
+      },
+    });
+    transporter.sendMail({
+      from: "prologic.simop@gmail.com",
+      to: user.email,
+      subject: "Prologic -- register request accepted",
+      text: "Your register request is accepted",
+    });
+  }
 
   return res.status(200).json({ message: "User accepted" });
 };

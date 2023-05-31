@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Virtualization Environment Details</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      padding: 20px;
+      height: 80%;
+    }
+
+    h1 {
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .details-container {
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .detail-label {
+      font-weight: bold;
+    }
+
+    .detail-value {
+      color: #555555;
+    }
+
+    .applicant-section {
+      margin-top: 20px;
+      border-top: 1px solid #dddddd;
+      padding-top: 20px;
+    }
+
+    .applicant-row {
+      display: flex;
+      margin-bottom: 5px;
+    }
+
+    .applicant-label {
+      font-weight: bold;
+      width: 120px;
+    }
+
+    .applicant-value {
+      color: #555555;
+    }
+    .material-icons {
+      vertical-align: middle;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<button class="close" mat-button (click)="onClose()">X</button>
+<body>
+    
+  <div class="details-container" style="border-color: #f44336;">
+    <h1>Virtualization Environment Reservation Details</h1>
+    <div class="detail-row">
+      <span class="detail-label">Type:</span>
+      <span class="detail-value">{{data.type}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">RAM:</span>
+      <span class="detail-value">{{data.ram}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Stockage:</span>
+      <span class="detail-value">{{data.stockage}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Bande passante:</span>
+      <span class="detail-value">{{data.bande_passante}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Système d'exploitation:</span>
+      <span class="detail-value">{{data.systeme_exploitation}}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Start:</span>
+      <span class="detail-value">{{data.start | date }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">End:</span>
+      <span class="detail-value">{{data.end | date}}</span>
+    </div>
+
+    <div class="applicant-section">
+      <h2>Applicant Informations</h2>
+      <div class="applicant-row">
+        <span class="applicant-label">First Name:</span>
+        <span class="applicant-value">{{data.applicant.firstName}}</span>
+      </div>
+      <div class="applicant-row">
+        <span class="applicant-label">Last Name:</span>
+        <span class="applicant-value">{{data.applicant.lastName}}</span>
+      </div>
+      <div class="applicant-row">
+        <span class="applicant-label">Phone:</span>
+        <span class="applicant-value">{{data.applicant.phone}}</span>
+      </div>
+      <div class="applicant-row">
+        <span class="applicant-label">Email:</span>
+        <span class="applicant-value">{{data.applicant.email}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Angular and Material icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.0/angular-material.min.js"></script>
+</body>
+
+</html>
+

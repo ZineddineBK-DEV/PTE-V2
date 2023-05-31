@@ -1,0 +1,57 @@
+
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+
+<div class="container" style="display: flex; justify-content: space-between;">
+
+    
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 10px; ;">
+              <button class="btn-add-reservation" (click)="Reservation()">
+                Reservation <span class="button-icon"><mat-icon>calendar_month</mat-icon></span>
+              </button>
+              
+            </div>
+              <table class="table table-dark table-sm">
+                <thead class="table-dark">
+                  <tr>
+                    
+                    <th><span>Type of the server</span></th>
+                    <th><span>Applicant</span></th>
+                    <th><span>Phone</span></th>
+                    <th><span>Email</span></th>
+                    <th><span>Is accepted ?</span></th>
+                    <th>Options</th>
+                  </tr>
+                </thead>
+                <tbody  >
+                  
+                  <tr *ngFor="let item of virtualisationEvents  | paginate: { itemsPerPage: 5, currentPage: p }">
+
+                    <td *ngIf="checkAdmin() || currentUserId== item.applicant._id">{{item.type}}</td>
+                    <td *ngIf="checkAdmin() || currentUserId== item.applicant._id">{{item.applicant.firstName }} {{item.applicant.lastName }}</td>
+              
+                    <td *ngIf="checkAdmin() || currentUserId== item.applicant._id"> {{item.applicant.phone }}</td>
+                    <td *ngIf="checkAdmin() || currentUserId== item.applicant._id">{{item.applicant.email }}</td>
+                    
+                    <td *ngIf="checkAdmin() || currentUserId == item.applicant._id">{{ checkAcceptation(item.isAccepted) }}</td>
+
+                    
+                    <td *ngIf="checkAdmin() || currentUserId== item.applicant._id">
+                      <button matTooltip="View all the details" mat-icon-button style="color: yellow" (click)="openViewDetails(item)"><mat-icon>visibility</mat-icon></button>
+                      <!-- <span>&nbsp;&nbsp;&nbsp;</span> -->
+                      <button *ngIf="checkAdmin()" matTooltip="Accept request" mat-icon-button style="color: greenyellow;" (click)="openConfirm(item['_id'])"><mat-icon>done</mat-icon></button>
+                      <!-- <span>&nbsp;&nbsp;&nbsp;</span> -->
+                      <button matTooltip="Delete request" mat-icon-button color="warn" (click)="openDelete(item['_id'])"><mat-icon>delete_outline</mat-icon></button>
+                      <button matTooltip="Send an email" mat-icon-button (click)="sendEmail()" ><mat-icon>mail</mat-icon></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <div class="pagination-container" style="display: flex;justify-content: center;margin-top: 20px;">
+                <pagination-controls (pageChange)="p = $event" class="my-pagination-controls"></pagination-controls>
+              </div>
+</div>
+
+            

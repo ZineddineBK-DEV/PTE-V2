@@ -6,6 +6,7 @@ import { EditRoleComponent } from './edit-role/edit-role.component';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 declare var $: any;
 
 @Component({
@@ -156,6 +157,16 @@ export class UserManagementComponent implements OnInit, AfterViewInit{
     const modalRef = this.modalService.open(NgbdModalContent);
     
     modalRef.componentInstance.IdItem = id;
+  }
+
+  openViewDetails(user){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    dialogConfig.height="78%";
+    dialogConfig.data=user;
+    this.dialog.open(EmployeeDetailsComponent, dialogConfig)
   }
 
 }

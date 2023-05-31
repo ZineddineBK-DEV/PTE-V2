@@ -7,7 +7,48 @@ import { CalendarOptions } from "@fullcalendar/core";
 import { TechnicianEventComponent } from './technician-event/technician-event.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { data } from 'src/app/technicians-data';
+import { TechnicianDetailsComponent } from './technician-details/technician-details.component';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddTechnicianComponent } from './add-technician/add-technician.component';
+import { TechnicianUpdateComponent } from './technician-update/technician-update.component';
+@Component({
+	selector: 'ngbd-modal-content',
+	standalone: true,
+	template: `
+		<div class="modal-header">
+			<h2 class="modal-title" id="modal-title">Technician deletion</h2>
+			<button
+				type="button"
+				class="btn-close"
+				aria-describedby="modal-title"
+				(click)="activeModal.dismiss('Cross click')"
+			></button>
+		</div>
+		<div class="modal-body">
+			<p>
+				<!-- <strong>Are you sure you want to delete <span class="text-primary">"John Doe"</span> profile?</strong> -->
+        <strong>Are you sure you want to delete this Tehnician ?</strong>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel click')">Cancel</button>
+			<button type="button" class="btn btn-danger" (click)="OkayDelete()">Delete</button>
+		</div>
+	`,
+})
+export class NgbdModalContent {
+  
 
+	constructor(public activeModal: NgbActiveModal) {}
+
+
+  OkayDelete(){
+    // window.location.reload()
+  }
+
+  
+}
 
 @Component({
   selector: 'app-technical-team',
@@ -25,17 +66,20 @@ export class TechnicalTeamComponent {
   currentCalendarIndex: number =-1 ;
   i;
   hoveredItem;
+  technician_Fake_Data= data;
 
   constructor( private technicalTeam : TechnicalTeamService ,
                private authService: AuthService ,
+               private modalService: NgbModal,
                private dialog : MatDialog ,){}
 
   ngOnInit() : void{
     this.technicalTeam.getTechnicians().subscribe((resultData:any) =>{
       this.technicians = resultData;
-
+      console.log('Technicians : ',this.technicians)
     })
     this.currentCalendarIndex = -1; 
+    
   }
 
   toggleCalendar(id:any, index ) {
@@ -133,6 +177,48 @@ export class TechnicalTeamComponent {
   checkAdmin(){
     const role = this.authService.getAuthData().roles.includes('admin');
       return role;
+  }
+  addTechnician(){}
+
+  highlightCard() {
+    const card = document.querySelector('.card');
+    if (card.classList.contains('card-highlight')) {
+      card.classList.remove('card-highlight');
+    } else {
+      card.classList.add('card-highlight');
+    }
+  }
+
+  openViewDetails(technician){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    dialogConfig.height="62.6%";
+    dialogConfig.data=technician;
+    this.dialog.open(TechnicianDetailsComponent, dialogConfig)
+  }
+
+  openDelete(){
+    const modalRef = this.modalService.open(NgbdModalContent);
+  }
+
+  openAdd(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    dialogConfig.height="78%";
+    this.dialog.open(AddTechnicianComponent, dialogConfig)
+  }
+  openEdit(technician){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    dialogConfig.height="78%";
+    dialogConfig.data=technician;
+    this.dialog.open(TechnicianUpdateComponent, dialogConfig)
   }
 
 }

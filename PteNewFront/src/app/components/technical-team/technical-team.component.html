@@ -11,25 +11,31 @@
                     </div>
       
                     <div class="card-body">
-                      <div style="display: flex; align-items: center;">
-                        <mat-form-field floatLabel="always" style="width: 100%; padding: 0;">
+                      <div style="display: flex; align-items: center;"><button *ngIf="checkAdmin()" class="btn-add-room" (click)="openAdd()">+ Technician</button>
+                        <mat-form-field floatLabel="always" style="width: 70%; padding: 0;margin-left: 20px;">
                           <mat-label></mat-label>
-                          <input class="input-search" [(ngModel)]="search" matInput type="text" placeholder="Search technician" >
+                          <div class="input-wrapper">
+                            <input class="input-search" [(ngModel)]="search" matInput type="text" placeholder="Search technician">
+                            <mat-icon class="search-icon">search</mat-icon>
+                          </div>
                         </mat-form-field>
                       </div>
                     
-                      <div class="section" *ngFor="let item of technicians | filter:search; let i = index" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
+                      <div class="section" *ngFor="let item of technician_Fake_Data | filter:search; let i = index" (mouseenter)="hoveredItem = item" (mouseleave)="hoveredItem = null">
                         <div class="card technician" [ngClass]="{'highlight': selectedTechnician === item['_id']}" style="position:relative;">
                           <div class="item" style="display:flex; align-items:center;">
                             <img [src]="'http://localhost:3001/images/' + item.image" alt="Image" style="width: 50px; height: 50px; margin-right: 8px;margin-left: 5px;border-radius: 5px;">
                             <div class="py-2 pl-2 col-span-4" style="flex:1;">
-                              <strong class="text-slate-900 text-sm font-medium dark:text-slate-200 capitalize">{{item.firstName}} {{item.lastName}}</strong>
-                              <div><span class="text-slate-900 text-sm font-medium dark:text-slate-400 capitalize">{{item.department}}</span>
+                              <strong class="text-slate-900 text-sm font-medium dark:text-slate-200 capitalize">{{item.fullname}} {{item.lastName}}</strong>
+                              <div><span class="text-slate-900 text-sm font-medium dark:text-slate-400 capitalize">{{item.specialization}}</span>
                               </div>
                             </div>
                             <!-- <button mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item" color="warn" (click)="deleteRoom(item['_id'])" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button> -->
-                            <button class="btn active-calender" (click)="toggleCalendar(item['_id'],i)">
-                              <mat-icon>east</mat-icon>
+                            <button  matTooltip="Delete technician"  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item && checkAdmin()" color="warn"  (mousedown)="highlightCard()" (click)="openDelete()"> <mat-icon>delete_outline</mat-icon></button>
+                              <button  matTooltip="Edit technician"  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item && checkAdmin()"   (mousedown)="highlightCard()" (click)="openEdit(item)"> <mat-icon>edit</mat-icon></button>
+                            <button matTooltip="View all the details" mat-icon-button (click)="openViewDetails(item)" ><mat-icon>visibility</mat-icon></button>
+                            <button  matTooltip="Consult calendar" class="btn active-calender" (click)="toggleCalendar(item['_id'],i)">
+                              <mat-icon>calendar_month</mat-icon>
                             </button>
                           </div>
                         </div>

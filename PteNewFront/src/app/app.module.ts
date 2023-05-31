@@ -39,6 +39,7 @@ import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 //material
+
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { MatRippleModule} from '@angular/material/core';
@@ -75,6 +76,15 @@ import { RoomEventsComponent } from './components/rooms/room-event/room-event.co
 import { TechnicalTeamComponent } from './components/technical-team/technical-team.component';
 import { EventDetailsComponent } from './components/technical-team/event-details/event-details.component';
 import { TechnicianEventComponent } from './components/technical-team/technician-event/technician-event.component';
+import { VirtualisationComponent } from './components/virtualisation/virtualisation.component';
+import { VirtualisationEventComponent } from './components/virtualisation/virtualisation-event/virtualisation-event.component';
+import { VirtualisationDetailsComponent } from './components/virtualisation/virtualisation-details/virtualisation-details.component';
+import { SendEmailComponent } from './components/virtualisation/send-email/send-email.component';
+import { ProfilDetailsComponent } from './components/sign-up-requests/profil-details/profil-details.component';
+import { EmployeeDetailsComponent } from './components/user-management/employee-details/employee-details.component';
+import { TechnicianDetailsComponent } from './components/technical-team/technician-details/technician-details.component';
+import { TechnicianUpdateComponent } from './components/technical-team/technician-update/technician-update.component';
+import { AddTechnicianComponent } from './components/technical-team/add-technician/add-technician.component';
 
 
 
@@ -121,7 +131,16 @@ import { TechnicianEventComponent } from './components/technical-team/technician
     EventDtailsComponent,
     TechnicalTeamComponent,
     EventDetailsComponent,
-    TechnicianEventComponent
+    TechnicianEventComponent,
+    VirtualisationComponent,
+    VirtualisationEventComponent,
+    VirtualisationDetailsComponent,
+    SendEmailComponent,
+    ProfilDetailsComponent,
+    EmployeeDetailsComponent,
+    TechnicianDetailsComponent,
+    TechnicianUpdateComponent,
+    AddTechnicianComponent
     
 
     

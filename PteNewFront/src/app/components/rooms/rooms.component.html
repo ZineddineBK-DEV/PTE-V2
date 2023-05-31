@@ -17,8 +17,10 @@
                             <button *ngIf="checkAdmin()" class="btn-add-room" (click)="addRoom()"><strong>+</strong> Room</button>
                             <mat-form-field floatLabel="always">
                               <mat-label></mat-label>
-                              <!-- <a>Search</a> -->
-                              <input class="input-search" [(ngModel)]="search" matInput type="text" placeholder="Search : label/location">
+                              <div class="input-wrapper">
+                                <input class="input-search" [(ngModel)]="search" matInput type="text" placeholder="label/location">
+                                <mat-icon class="search-icon">search</mat-icon>
+                              </div>
                             </mat-form-field>
                         </div>
                           
@@ -28,13 +30,18 @@
                             <div class="item" style="display:flex; align-items:center;">
                               <div class="py-2 pl-2 col-span-4" style="flex:1; margin-left: 8px;">
                                 <strong class="text-slate-900 text-sm font-medium dark:text-slate-200 capitalize">Label : {{item.label}}</strong>
-                                <div><span class="text-slate-900 text-sm font-medium dark:text-slate-400 capitalize">Location : {{item.location}}</span>
+                                <div>
+                                  <span class="text-slate-900 text-sm font-medium dark:text-slate-400 capitalize">Location : {{item.location}}</span>
+                                </div>
+                                <div>
+                                  <span class="text-slate-900 text-sm font-medium dark:text-slate-400 capitalize">Capacity : {{item.capacity}} chairs</span>
                                 </div>
                               </div>
-                              <button  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item && checkAdmin()" color="warn" (click)="open(item['_id'])" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button>
-                              <button  class="btn active-calender" (click)="toggleCalendar(item['_id'],i)">
-                                <mat-icon>east</mat-icon>
-                              </button>
+                                
+                              
+                              <button matTooltip="Delete Room"  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item && checkAdmin()" color="warn" (click)="open(item['_id'])" (mousedown)="highlightCard()"> <mat-icon>delete_outline</mat-icon></button>
+                              <button matTooltip="Edit Room"  mat-icon-button class="no-print hidden-btn delete-btn" *ngIf="hoveredItem === item && checkAdmin()"  (click)="open(item['_id'])" (mousedown)="highlightCard()"> <mat-icon>edit</mat-icon></button>
+                              <button matTooltip="Consult calendar" class="btn active-calender" (click)="toggleCalendar(item['_id'],i)"><mat-icon>calendar_month</mat-icon></button>
                             </div>
                           </div> 
                         </div>

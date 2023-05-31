@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 })
 export class LoginComponent implements OnInit {
+    showSuccessLogin =false;
     loginFailed=false;
     loginForm = new FormGroup({
     email: new FormControl(''),
@@ -31,14 +32,15 @@ export class LoginComponent implements OnInit {
     const token=this.authService.loginUser(this.loginForm.value);
     if(token){
       this.loginFailed=false;
+      this.showSuccessLogin=true;
       this.router.navigate(['/dashboard']);
     }else{
       this.loginFailed=true;
-      this.snackBar.open('Invalid email or password', 'Dismiss', {
-        duration: 5000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom'
-      });
+      // this.snackBar.open('Invalid email or password', 'Dismiss', {
+      //   duration: 5000,
+      //   horizontalPosition: 'center',
+      //   verticalPosition: 'bottom'
+      // });
     
     }
   }

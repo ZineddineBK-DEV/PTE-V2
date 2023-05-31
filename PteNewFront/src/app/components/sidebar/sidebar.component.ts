@@ -21,7 +21,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/conference-rooms', title: 'Conference Rooms',  icon:'meeting_room', class: '' },
     {path :'/vehicles' , title:'Vehicules ', icon:'directions_car' , class:''},
     { path: '/technical team', title: 'Technical Teams',  icon:'engineering', class: '' },
-    { path: '/virtual-Env', title: 'Environment labs',  icon:'storage', class: '' },
+    { path: '/virtualisation', title: 'Environment labs',  icon:'storage', class: '' },
 
     
     
@@ -50,7 +50,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     
     this.menuItems = ROUTES;
-    console.log(this.menuItems)
     const isAdmin = this.checkAdmin();
     this.menuItems = ROUTES.filter(menuItem => {
       if (isAdmin) {

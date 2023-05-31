@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+
+<button class="close" mat-button (click)="onClose()">X</button>
+<div class="container">
+  <form #virtualisationForm="ngForm" (ngSubmit)="submit(virtualisationForm.value)">
+    <fieldset>
+      <legend>book a virtualization device</legend>
+      
+      
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select class="form-control" id="type" name="type" [(ngModel)]="virtualisationForm.value.type">
+          <option>Serveurs dédiés</option>
+          <option>Serveurs virtuels (VPS)</option>
+          <option>Serveurs cloud</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="processeur">Processeur</label>
+        <select class="form-control" id="processeur" name="processeur" [(ngModel)]="virtualisationForm.value.processeur">
+          <option>Intel Xeon</option>
+          <option> AMD Ryzen</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="ram">RAM</label>
+        <select class="form-control" id="ram" name="ram" [(ngModel)]="virtualisationForm.value.ram">
+          <option> 8 Go</option>
+          <option> 16 Go</option>
+          <option> 32 Go</option>
+          <option> 64 Go</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="stockage">Stockage</label>
+        <select class="form-control" id="stockage" name="stockage" [(ngModel)]="virtualisationForm.value.stockage">
+          <option> 500 Go</option>
+          <option> 1 To</option>
+          <option> 2 To</option>
+          <option> 4 To</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="bande_passante">Bande passante</label>
+        <select class="form-control" id="bande_passante"  name="bande_passante" [(ngModel)]="virtualisationForm.value.bande_passante">
+          <option> 100 Mbps</option>
+          <option> 1 Gbps</option>
+          <option> 10 Gbps,</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="systeme_exploitation">Systeme d'exploitation</label>
+        <select class="form-control" id="systeme_exploitation" name="systeme_exploitation" [(ngModel)]="virtualisationForm.value.systeme_exploitation">
+          <option> Windows Server</option>
+          <option> Ubuntu</option>
+          <option> CentOS</option>
+        </select>
+      </div>
+
+      <div class="start" style="margin-top: 20px;">
+        <!-- <label for="start">Start</label> -->
+        <ejs-datetimepicker [(ngModel)]="originaltStartDate"  (input)="checkDate()" #startPicker name="start" class="picker " placeholder="Choose a start date and time" required></ejs-datetimepicker>
+      </div>
+
+      <div class="end" style="margin-top: 20px;">
+        <!-- <label for="end">End</label> -->
+        <ejs-datetimepicker [(ngModel)]="originaltEndDate"  (input)="checkDate()" #endPicker name="end" class="picker " placeholder="Choose an end date and time" required></ejs-datetimepicker>
+      </div>
+
+      <div class="form-group" style="margin-top: 20px;">
+        <label for="bio">Description</label>
+        <textarea name="description" class="form-control"  rows="5" [(ngModel)]="virtualisationForm.value.description"></textarea>
+      </div>
+      
+    </fieldset>
+    <button [disabled]="virtualisationForm.form.invalid" class="btn-add" type="submit" style="margin-bottom: 15px; margin-top: 25px;" >Save</button>
+    <!-- <button [disabled]="experienceForm.form.invalid" class="btn-add"type="submit">Add</button> -->
+  </form>
+</div>

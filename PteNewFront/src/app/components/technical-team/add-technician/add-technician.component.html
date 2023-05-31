@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+
+<button class="close" mat-button (click)="onClose()">X</button>
+<div class="container">
+  <form #RoomForm="ngForm" (ngSubmit)="submit()">
+    <fieldset>
+      <legend>Add Technician</legend>
+      
+      <div class="form-group">
+        <label for="nom">Full name </label>
+        <input name="label" type="text" class="form-control" ngModel="" placeholder="Enter full name" required>
+      </div>
+      
+      
+      <div class="form-group">
+        <label for="nom">Email</label>
+        <input name="location" type="text" class="form-control" ngModel="" placeholder="Enter email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="capacity">Phone</label>
+        <input name="capacity" type="text" class="form-control" ngModel="" placeholder="Enter the phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="capacity">Specialization</label>
+        <input name="capacity" type="text" class="form-control" ngModel="" placeholder="Enter the specialization of the thechnician" required>
+      </div>
+
+      <div class="form-group">
+        <label for="capacity">Experience Level</label>
+        <input name="capacity" type="text" class="form-control" ngModel="" placeholder="Enter the experience level" required>
+      </div>
+
+      <div class="form-group">
+        <label for="capacity">Certification</label>
+        <input name="capacity" type="text" class="form-control" ngModel="" placeholder="Enter his certification" required>
+      </div>
+      
+    </fieldset>
+    <button [disabled]="RoomForm.form.invalid" class="btn-add" type="submit">Save</button>
+    <!-- <button [disabled]="experienceForm.form.invalid" class="btn-add"type="submit">Add</button> -->
+  </form>
+</div>

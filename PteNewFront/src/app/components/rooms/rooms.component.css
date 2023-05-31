@@ -76,3 +76,23 @@ border: 2px solid red;
 .cardd{
     margin-bottom: 10px;
 }
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
+  }
+  
+  .input-search {
+    padding-right: 30px; /* Adjust this value to add spacing between the input text and the icon */
+  }
+  

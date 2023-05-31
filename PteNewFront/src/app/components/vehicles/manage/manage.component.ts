@@ -84,7 +84,8 @@ export class ManageComponent implements OnInit {
           this.snackBar.open('Event deleted successfully', 'Dismiss', {
             duration: 3000,
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['green-snackbar']
           });
         });
       }
