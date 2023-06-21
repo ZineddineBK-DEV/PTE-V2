@@ -39,7 +39,7 @@ import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 //material
-
+import { DatePipe } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { MatRippleModule} from '@angular/material/core';
@@ -85,6 +85,7 @@ import { EmployeeDetailsComponent } from './components/user-management/employee-
 import { TechnicianDetailsComponent } from './components/technical-team/technician-details/technician-details.component';
 import { TechnicianUpdateComponent } from './components/technical-team/technician-update/technician-update.component';
 import { AddTechnicianComponent } from './components/technical-team/add-technician/add-technician.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 
 
@@ -140,7 +141,8 @@ import { AddTechnicianComponent } from './components/technical-team/add-technici
     EmployeeDetailsComponent,
     TechnicianDetailsComponent,
     TechnicianUpdateComponent,
-    AddTechnicianComponent
+    AddTechnicianComponent,
+    NewPasswordComponent
     
 
     
@@ -200,7 +202,7 @@ import { AddTechnicianComponent } from './components/technical-team/add-technici
     MatDialogModule,
     
     ],
-  providers: [AuthService, 
+  providers: [AuthService,DatePipe, 
     { 
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,

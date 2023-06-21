@@ -45,6 +45,8 @@ router.patch("/acceptEvent/:id", authMiddleware, userEventCtr.updateEvent);
 router.delete("/deleteEvent/:id", authMiddleware, userEventCtr.deleteEvent);
 
 router.get("/:id", authMiddleware, userCtr.getUserById);
+router.get("/getpassword/:id", authMiddleware, userCtr.getUserPassword);
+
 router.get("/getPlanById/:id", authMiddleware, userPlanCtr.getPlanById);
 
 router.post("/upload",upload.single("pdf"), authMiddleware,userPlanCtr.uploadPlan);

@@ -134,13 +134,13 @@ export class RoomsComponent {
       this.roomEvents.forEach(event => {
         event.backgroundColor = this.getEventColor(event.isAccepted);
       });
-
-      if(!this.checkAdmin()){
-        this.calendarOptions.events = this.roomEvents.filter(obj => obj.isAccepted === true);
+      this.calendarOptions.events = this.roomEvents
+      // if(!this.checkAdmin()){
+      //   this.calendarOptions.events = this.roomEvents.filter(obj => obj.isAccepted === true);
         
-      }else{
-        this.calendarOptions.events = this.roomEvents
-      }
+      // }else{
+      //   this.calendarOptions.events = this.roomEvents
+      // }
   
       
     })

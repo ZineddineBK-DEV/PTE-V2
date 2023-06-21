@@ -37,9 +37,9 @@ export class UserService {
 }
 
   
-getUserByID(id:any){
-  return this.http.get('http://localhost:3001/api/users/'+id)
-}
+  getUserByID(id:any){
+    return this.http.get('http://localhost:3001/api/users/'+id)
+  }
   setDateRange(dateStart: Date) {
     this.dateStart = dateStart;
     
@@ -81,5 +81,8 @@ getUserByID(id:any){
         })as OperatorFunction<Object, { acceptedEvents: EventInput[]; rejectedEvents: EventInput[]; }>
       );
       
+  }
+  getUserPassword(id:any){
+    return this.http.get('http://localhost:3001/api/users/getpassword/'+id)
   }
 }

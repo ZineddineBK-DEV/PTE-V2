@@ -6,7 +6,7 @@ import {registerLicense} from '@syncfusion/ej2-base';
 
 
 
-registerLicense("ORg4AjUWIQA/Gnt2VFhiQlVPcEBDXXxLflF1VWVTf1h6d1JWESFaRnZdQV1mSH9TcEVqWXZYcXRc");
+registerLicense("ORg4AjUWIQA/Gnt2VFhiQlJPcUBDVHxLflF1VWRTfFl6cF1WESFaRnZdQV1lSHdTcUZrW3hWeHRU");
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)

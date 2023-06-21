@@ -42,24 +42,29 @@ export class AuthService {
     return this.http.get<User>(url);
   }
   
-
   loginUser(user: any) {
     this.http.post<User>(this._loginUrl, user).subscribe(response => {
       console.log(response);
       this.token = response.token;
       if (this.token) {
         this.setAuthTimer(response.expiresIn)
-        
+        console.log(user)
+  
         this.userId = response._id;
-        console.log(this.userId);
         const now = new Date();
         const expirationDate = new Date(now.getTime() + response.expiresIn * 1000);
         this.saveAuthData(this.token, expirationDate)
         this.authStatusListener.next(true);
-
+        const UserPassword = response.password;
+        localStorage.setItem("password",UserPassword)
         this.user = this.getUser(response.token);
-        
-        this.router.navigate(["/users"]);
+        if(response.roles[0]=="admin")
+        {
+          this.router.navigate(["/dashboard"]);
+        }
+        else{
+          this.router.navigate(['/user-profile/',response._id]);
+        }
       }
 
     })
@@ -143,6 +148,7 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
     localStorage.removeItem("userId");
+    localStorage.removeItem("profiles")
   }
   
   getSignUpRequests(): Observable<any> {

@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/users.service';
+
 
 
 @Component({
@@ -16,12 +18,13 @@ export class EditProfileComponent {
 
   constructor(private dialogRef : MatDialogRef<EditProfileComponent>,
               public userService :UserService,
+              private datePipe: DatePipe,
               @Inject(MAT_DIALOG_DATA) public data: any){}
 
   ngOnInit() :void{
-  
-    this.DateOfBirdthObj = new Date(this.data.DateOfBirth);
-    this.HiringDateObj = new Date(this.data.hiringDate);
+    
+    this.DateOfBirdthObj = this.datePipe.transform(this.data.DateOfBirth, 'yyyy-MM-dd')
+    this.HiringDateObj =this.datePipe.transform(this.data.hiringDate, 'yyyy-MM-dd')
     
   }
 
@@ -77,7 +80,7 @@ export class EditProfileComponent {
     this.userService.updateUser(this.data._id,d).subscribe(response=>
       {
       console.log(response)
-      //location.reload()
+      window.location.reload()
     })
   }
 

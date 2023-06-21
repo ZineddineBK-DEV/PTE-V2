@@ -25,7 +25,7 @@ def scrape_linkedin_profiles():
 
    
     username = driver.find_element(By.ID, "username")
-    username.send_keys("forjanetflix@gmail.com")  # Replace with your LinkedIn username/email
+    username.send_keys("youssef.bkhayatia@gmail.com")  # Replace with your LinkedIn username/email
 
     pword = driver.find_element(By.ID, "password")
     pword.send_keys("123456y y")  # Replace with your LinkedIn password

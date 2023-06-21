@@ -147,6 +147,7 @@ module.exports.createEvent = async function (req, res) {
         room: req.body.room,
         applicant: req.body.applicant,
       };
+      
       if (res.locals.user.roles.includes("admin")) {
         body.isAccepted = true;
       }

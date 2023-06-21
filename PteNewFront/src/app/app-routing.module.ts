@@ -18,6 +18,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { TechnicalTeamComponent } from './components/technical-team/technical-team.component';
 import { VirtualisationComponent } from './components/virtualisation/virtualisation.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 const routes:  Routes = [
   { path: 'signup',     component: SignupComponent },
@@ -25,7 +26,8 @@ const routes:  Routes = [
   
   { path : 'verificationcode' , component:VerificationcodeComponent },
   { path : 'changepassword' , component:ChangepasswordComponent},
-  {path : 'dashboard' ,canActivate:[AuthGuard], component:DashboardComponent},
+  { path : 'newpassword' ,canActivate:[AuthGuard], component:NewPasswordComponent},
+  {path : 'dashboard' ,canActivate:[AuthGuard,RoleGuard], component:DashboardComponent},
   { path :'conference-rooms',canActivate:[AuthGuard], component:RoomsComponent},
   { path: 'requests',canActivate:[AuthGuard,RoleGuard] ,component: SignUpRequestsComponent},
   { path :'user-profile/:id',canActivate:[AuthGuard], component:UserProfileComponent},

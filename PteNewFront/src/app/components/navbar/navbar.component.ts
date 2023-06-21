@@ -41,19 +41,23 @@ import * as bcrypt from 'bcryptjs';
 	`,
 })
 export class NgbdModalContent {
-  password: any; incorrectPAssword:boolean;
+  hashedPassword: any; incorrectPAssword:boolean;
 	constructor(public activeModal: NgbActiveModal,
     private router: Router,
+    private userService: UserService
     ) {}
     ngOnInit(){
-      this.incorrectPAssword=false
+      this.incorrectPAssword=false;
+      this.userService.getUserPassword(localStorage.getItem("userId")).subscribe((resultData:any) =>{
+        this.hashedPassword = resultData;
+      })
+      
     }
     Verify(){
       const passwordInput = document.getElementById('passwordInput') as HTMLInputElement;
       const passwordValue = passwordInput.value;
-      const hashedPassword = '$2a$10$jzZp.56giu1YkgkfgCpOsOdNmxY0B9cFqfY5Z27C3pc.ZeInO.CU.';
 
-      bcrypt.compare(passwordValue, hashedPassword, (error, result) => {
+      bcrypt.compare(passwordValue, this.hashedPassword, (error, result) => {
         if (error) {
           console.error(error);
           return;
@@ -61,7 +65,7 @@ export class NgbdModalContent {
 
         if (result) {
           this.activeModal.close()
-          this.router.navigate(['/changepassword']);
+          this.router.navigate(['/newpassword']);
           
         } else {
           console.log('Password is incorrect!');

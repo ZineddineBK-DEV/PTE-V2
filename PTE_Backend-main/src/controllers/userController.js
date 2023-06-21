@@ -151,6 +151,7 @@ module.exports.login = async function (req, res, next) {
       image: fetchedUser.image,
       _id: fetchedUser._id,
       roles: fetchedUser.roles,
+      password : fetchedUser.password
     });
   } catch (error) {
     return res.status(500).json({ message: "problem in bycript" });
@@ -420,6 +421,20 @@ module.exports.getUserById = async function (req, res) {
   try {
     const user = await User.findById(ID).populate("cv");
     res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
+module.exports.getUserPassword = async function (req, res) {
+  const ID = req.params.id;
+
+  if (!ObjectId.isValid(ID)) {
+    return res.status(404).json("ID is not valid");
+  }
+  try {
+    const user = await User.findById(ID)
+    res.status(200).json(user.password);
   } catch (error) {
     res.status(500).json({ message: error });
   }

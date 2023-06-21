@@ -36,11 +36,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/dashboard']);
     }else{
       this.loginFailed=true;
-      // this.snackBar.open('Invalid email or password', 'Dismiss', {
-      //   duration: 5000,
-      //   horizontalPosition: 'center',
-      //   verticalPosition: 'bottom'
-      // });
     
     }
   }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CvService } from 'src/app/services/cv.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,6 +12,78 @@ import { ProjectFormComponent } from './project-form/project-form.component';
 import { CertificationFormComponent } from './certification-form/certification-form.component';
 import { EducationFormComponent } from './education-form/education-form.component';
 import { ProfileImageComponent } from './profile-image/profile-image.component';
+import * as bcrypt from 'bcryptjs';
+
+
+
+@Component({
+	selector: 'ngbd-modal-content',
+	standalone: true,
+	template: `
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-title"><strong>Change Password</strong></h4>
+			<button
+				type="button"
+				class="btn-close"
+				aria-describedby="modal-title"
+				(click)="activeModal.dismiss('Cross click')"
+			></button>
+		</div>
+		<div class="modal-body">
+    <div class="modal-body">
+    <div class="modal-body">
+	<div class="form-group">
+	
+		<input id="passwordInput" #passwordInput class="form-control"  placeholder="Enter your current password">
+
+    
+  </div>
+</div>
+
+</div>
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel click')">Cancel</button>
+			<button type="button" class="btn btn-danger" (click)="Verify()">Verifiy</button>
+		</div>
+	`,
+})
+export class NgbdModalContent {
+  password: any; incorrectPAssword:boolean;
+	constructor(public activeModal: NgbActiveModal,
+    private router: Router,
+    ) {}
+    ngOnInit(){
+      this.incorrectPAssword=false
+    }
+    Verify(){
+      const passwordInput = document.getElementById('passwordInput') as HTMLInputElement;
+      const passwordValue = passwordInput.value;
+      const hashedPassword = '$2a$10$jzZp.56giu1YkgkfgCpOsOdNmxY0B9cFqfY5Z27C3pc.ZeInO.CU.';
+
+      bcrypt.compare(passwordValue, hashedPassword, (error, result) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        if (result) {
+          this.activeModal.close()
+          this.router.navigate(['/changepassword']);
+          
+        } else {
+          console.log('Password is incorrect!');
+          this.incorrectPAssword =true;
+        }
+      });
+      }
+
+  
+}
+
+
+
 
 @Component({
   selector: 'app-user-profile',
@@ -39,7 +111,7 @@ export class UserProfileComponent implements OnInit {
               public userService :UserService,
               public authService : AuthService,
               public cvService : CvService, 
-              // public dataService : DataService,
+              private modalService: NgbModal,
               private dialog : MatDialog ,
               private router :Router,
               private route: ActivatedRoute,
@@ -133,11 +205,6 @@ export class UserProfileComponent implements OnInit {
       });
     })
     
-    // this.userService.updateUser(this.data._d,this.formData).subscribe(response=>
-    //     {
-    //     console.log(response)
-    //   })
-      
   }
 
   editProfile(){
@@ -209,6 +276,12 @@ export class UserProfileComponent implements OnInit {
     }
   
   }
+
+  goToSettings() {
+
+    const modalRef = this.modalService.open(NgbdModalContent);
+  }
+  
 
 
 }

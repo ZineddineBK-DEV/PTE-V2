@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { WebScrapinService } from 'src/app/services/web-scrapin.service';
 import { SendEmailComponent } from '../virtualisation/send-email/send-email.component';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,24 +17,26 @@ export class DashboardComponent {
   profiles:any;
   loading: boolean = false;
   conferenceRoomDescription: string;
-  tableauStocke;
+  tableauStocke:any;
   currentPage = 1;
   itemsPerPage = 6;
 
-  constructor(private http: HttpClient, private webScrapinService : WebScrapinService,private dialog : MatDialog,) {}
+  constructor(private http: HttpClient,
+              private authService :AuthService,
+              private dialog : MatDialog,) {}
 
 
   ngOnInit() : void{
 
     this.tableauStocke = Object.values(JSON.parse(localStorage.getItem('profiles')));
 
-    console.log("TableauStock :",this.tableauStocke)
 
   }
   
 
   async scrapeProfiles() {
     try {
+      localStorage.removeItem("profiles");
       const data = {
         domainparam: this.domainparam,
         locationparam: this.locationparam 
@@ -63,5 +66,10 @@ export class DashboardComponent {
     dialogConfig.width = "40%";
     dialogConfig.height="60%";
     this.dialog.open(SendEmailComponent, dialogConfig)
+  }
+
+  checkAdmin(){
+    const role = this.authService.getAuthData().roles.includes('admin');
+      return role;
   }
 }

@@ -1,65 +1,16 @@
 <app-navbar></app-navbar>
 <app-sidebar></app-sidebar>
 
-
-
-<div class="search-section">
+<div *ngIf="checkAdmin()" class="search-section">
     <span><strong>Search profils on Linkedin :</strong> </span>
     <input type="text" [(ngModel)]="domainparam" class="search-input" placeholder="Enter domain">
     <input type="text" [(ngModel)]="locationparam" class="search-input" placeholder="Enter location">
     <button class="search-button" (click)="scrapeProfiles()">Search</button>
   </div>
 
-<div *ngIf="loading" style="margin-left: 55%;margin-top: 15%;"><h1>Loading...</h1></div>
+<div *ngIf="loading && checkAdmin()" style="margin-left: 55%;margin-top: 15%;"><h1>Loading...</h1></div>
 
-<div *ngIf="!loading">
-  <!-- Display the profiles table or other UI elements -->
-</div>
-
-  <!-- <div style="margin-top: 15%; margin-left: 60%;">
-    <div *ngFor="let objet of tableauStocke">
-      <h3>{{ objet.name }}</h3>
-      <p>{{ objet.job }}</p>
-      <p>{{ objet.location }}</p>
-      <a [href]="objet.profileUrl" target="_blank">Profil LinkedIn</a>
-    </div>
-  </div> -->
-  
-<!-- <div *ngFor="let profil of tableauStocke | paginate: { itemsPerPage: 5, currentPage: currentPage }">
-
-<div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
-    <div class="card p-4"> 
-        <div class=" image d-flex flex-column justify-content-center align-items-center"> 
-            <button class="btn btn-secondary"> 
-                <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-            </button> 
-            <span class="name mt-3">{{profil.name}}</span> 
-            <span style="display: flex; align-items: center;">
-                <mat-icon style="margin-right: 5px;">location_on</mat-icon>
-                <h4 style="margin-bottom: 0;">{{profil.location}}</h4>
-              </span>
-                
-            <div class=" d-flex mt-2">
-                 <button class="btn1 btn-dark">Send an email</button>
-            </div> 
-            <div class="text mt-3">
-                <span>{{profil.job}}
-                    <br>
-                    <br> {{profil.schools}}
-                 </span> 
-                </div>
-            <div class=" px-2 rounded mt-4 date "> 
-              <a [href]="profil.profileUrl" target="_blank">Profil LinkedIn</a>
-            </div> 
-        </div> 
-    </div>
-</div>
-<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
-
-
-</div> -->
-
-<div class="container mt-4 mb-4" style="margin-top: 15%; margin-left: 18.4%;">
+<div *ngIf="checkAdmin()" class="container mt-4 mb-4" style="margin-top: 15%; margin-left: 18.4%;">
   <div class="row">
     <div class="col-md-4" *ngFor="let profil of tableauStocke | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
       <div class="card p-4" style="margin-top: 10px;height: 450px;">
@@ -94,7 +45,8 @@
     </div>
   </div>
 </div>
-<div class="pagination-container" style="margin-left: 50%;margin-top: 20px;">
+<div *ngIf="checkAdmin() && profiles" class="pagination-container" style="margin-left: 50%;margin-top: 20px;">
   <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 </div>
+
 
